@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Template Areas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    main {
+      display: grid;
+      grid-template-areas: "topbar" "content";
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    header { grid-area: topbar; }
+    article { grid-area: content; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #111;
+      padding: 15px;
+      flex-wrap: wrap;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 10px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    
+    .tags {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      border-radius: 0; /* Cambia según el estilo */
+      box-shadow: 8px 10px 20px #00000085;
+      filter: grayscale(.5);
+      object-fit: cover;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+      transition: transform 300ms;
+      filter: grayscale(0);
+      box-shadow: 8px 10px 30px #000000dd;
+    }
+  </style>
+  <script>
+    function setGrid(columns) {
+      const gallery = document.querySelector('.gallery');
+      if (columns === 2) {
+        gallery.style.gridTemplateColumns = 'repeat(2, 1fr)';
+      } else if (columns === 3) {
+        gallery.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      }
+    }
+
+    function setImageStyle(style) {
+      const images = document.querySelectorAll('.gallery img');
+      images.forEach(img => {
+        if (style === 'circle') {
+          img.style.borderRadius = '50%';
+          img.style.aspectRatio = '1 / 1'; // Para asegurar que sean circulares
+        } else if (style === 'square') {
+          img.style.borderRadius = '0';
+          img.style.aspectRatio = '1 / 1';
+        } else if (style === 'portrait') {
+          img.style.borderRadius = '0';
+          img.style.aspectRatio = '3 / 4';
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <header>
+      <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+    <article>
+      <div class="tags">
+        <button onclick="setGrid(2)">Grid de 2 columnas</button>  
+        <button onclick="setGrid(3)">Grid de 3 columnas</button>  
+        <button onclick="setImageStyle('circle')">Circulares</button>  
+        <button onclick="setImageStyle('square')">Cuadrado</button>  
+        <button onclick="setImageStyle('portrait')">Retrato</button>  
+      </div>
+
+      <div class="gallery">   
+        <img tabindex="0" src="https://images.unsplash.com/photo-1727324735318-c25d437052f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        <img tabindex="0" src="https://images.unsplash.com/photo-1727207652611-59e981d73c48?q=80&w=2232&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        <img tabindex="0" src="https://images.unsplash.com/photo-1727108106379-f4ff1ba26ebc?q=80&w=2435&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        <img tabindex="0" src="https://images.unsplash.com/photo-1727282960386-4d2ccdc87ad0?q=80&w=2380&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        <img tabindex="0" src="https://toerisme-vlaanderen.bynder.com/m/1260286f4b6c78b0/webimage-Pajottenland_Galmaarden3.png">
+        <img tabindex="0" src="https://live.staticflickr.com/3394/4632103154_81c61962d7_b.jpg"> 
+        <img tabindex="0" src="https://www.iva.de/sites/default/files/styles/16x9_1920/public/benutzer/uid/magazinbilder/kopfweiden_in_einer_baumreihe_41247429l_fotolia.jpg?h=43536b0b&itok=oRHJ0HDZ">
+        <img tabindex="0" src="https://th.bing.com/th/id/OIP.GurVZoHfZVKYeMduS4rnvwAAAA?pid=ImgDet&w=185&h=231&c=7&dpr=1,3">
+      </div>
+    </article>
+  </main>
+</body>
+</html>
